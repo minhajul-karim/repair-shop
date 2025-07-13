@@ -1,10 +1,16 @@
-import Header from "@/components/Header";
+import { Header } from "@/components/Header"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function RSLayout({
+    children,
+}: {
+    children: React.ReactNode
+}) {
     return (
-        <div>
+        <div className="mx-auto w-full max-w-7xl">
             <Header />
-            {children}
+            <div className="px-4 py-2">
+                {children}
+            </div>
         </div>
-    );
+    )
 }
