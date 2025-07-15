@@ -8,6 +8,13 @@
       "when": 1752489746245,
       "tag": "0000_flowery_the_stranger",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752557502192,
+      "tag": "0001_third_king_cobra",
+      "breakpoints": true
     }
   ]
 }

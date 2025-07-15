@@ -39,7 +39,7 @@ export const tickets = pgTable("tickets", {
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description").notNull(),
   completed: boolean("completed").notNull().default(false),
-  technician: varchar("technician", { length: 255 }).notNull(),
+  technician: varchar("technician", { length: 255 }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
