@@ -1,4 +1,4 @@
-import { BackButton } from "@/components/BackButton";
+import { ErrorMessage } from "@/components/ErrorMessage";
 import { getCustomerPageData } from "@/lib/utils/customerHelpers";
 
 type PageProps = {
@@ -10,12 +10,7 @@ export default async function CustomerForm({ searchParams }: PageProps) {
   const result = await getCustomerPageData(id);
 
   if (!result.success) {
-    return (
-      <>
-        <h2 className="mb-2 text-black dark:text-blue-500">{result.error}</h2>
-        <BackButton />
-      </>
-    );
+    return <ErrorMessage message={result.error} />;
   }
 
   const { mode, customer } = result.data;
