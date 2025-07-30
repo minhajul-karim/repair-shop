@@ -2,6 +2,7 @@ import { getCustomer } from "@/lib/queries/getCustomer";
 import { getTicket } from "@/lib/queries/getTicket";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { getTicketPageData } from "@/lib/utils/ticketHelpers";
+import TicketForm from "./TicketForm";
 
 type PageProps = {
   searchParams: Promise<{
@@ -20,17 +21,11 @@ export default async function TicketPage({ searchParams }: PageProps) {
   const { mode, ticket, customer } = result.data;
 
   if (ticketId) {
-    return (
-      <>
-        <p>Edit ticket with ticket info: {JSON.stringify(ticket)}</p>
-        <br />
-        <p>Edit ticket with customer info: {JSON.stringify(customer)}</p>
-      </>
-    );
+    return <TicketForm customer={customer} ticket={ticket} />;
   }
 
   if (customerId) {
-    return <p>Create ticket with customer info: {JSON.stringify(customer)}</p>;
+    return <TicketForm customer={customer} />;
   }
 
   return null;
