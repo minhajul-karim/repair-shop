@@ -1,11 +1,12 @@
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { getCustomerPageData } from "@/lib/utils/customerHelpers";
+import CustomerForm from "./CustomerForm";
 
 type PageProps = {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 };
 
-export default async function CustomerForm({ searchParams }: PageProps) {
+export default async function Customer({ searchParams }: PageProps) {
   const { id } = await searchParams;
   const result = await getCustomerPageData(id);
 
@@ -15,22 +16,9 @@ export default async function CustomerForm({ searchParams }: PageProps) {
 
   const { mode, customer } = result.data;
 
-  if (!id) {
-    return (
-      <h2 className="mb-2 text-black dark:text-blue-500">Add customer form</h2>
-    );
+  if (!id || mode === "create") {
+    return <CustomerForm />;
   }
 
-  if (mode === "create") {
-    return (
-      <h2 className="mb-2 text-black dark:text-blue-500">Add customer form</h2>
-    );
-  }
-
-  return (
-    <>
-      <h2 className="mb-2 text-black dark:text-blue-500">Edit Customer</h2>
-      <p>Customer data: {JSON.stringify(customer)}</p>
-    </>
-  );
+  return <CustomerForm customer={customer} />;
 }
