@@ -2,10 +2,9 @@
 
 import InputField from "@/components/inputs/InputField";
 import TextAreaField from "@/components/inputs/TextArea";
+import SelectField from "@/components/inputs/SelectField";
 import { Button } from "@/components/ui/button";
-import {
-  Form
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import type { CustomerInsertSchemaType } from "@/zod-schema/customer";
 import { customerInsertSchema } from "@/zod-schema/customer";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -76,9 +75,9 @@ export default function CustomerForm({ customer }: Props) {
             name="city"
             placeholder="City"
           />
-          <InputField<CustomerInsertSchemaType>
+          <SelectField<CustomerInsertSchemaType>
             name="state"
-            placeholder="State"
+            placeholder="Select state"
           />
           <InputField<CustomerInsertSchemaType> name="zip" placeholder="Zip" />
           <TextAreaField<CustomerInsertSchemaType>
