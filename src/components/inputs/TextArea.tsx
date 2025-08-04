@@ -5,6 +5,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 import { Textarea } from "../ui/textarea";
 import { useFormContext } from "react-hook-form";
 import { InputHTMLAttributes } from "react";
@@ -17,6 +18,7 @@ type Props<T> = {
 export default function TextAreaField<T>({
   name,
   placeholder,
+  className,
   ...rest
 }: Props<T>) {
   const form = useFormContext();
@@ -30,7 +32,7 @@ export default function TextAreaField<T>({
           <FormLabel>{placeholder}</FormLabel>
           <FormControl>
             <Textarea
-              className="w-full md:w-md"
+              className={cn("w-full md:w-md", className)}
               placeholder={placeholder}
               {...field}
               {...rest}
