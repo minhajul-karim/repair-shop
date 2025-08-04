@@ -16,17 +16,24 @@ import {
 } from "@/components/ui/select";
 import { useFormContext } from "react-hook-form";
 import { InputHTMLAttributes } from "react";
-import states from "@/constants/states";
+
+type Option = {
+    id: number;
+    label: string;
+    value: string;
+}
 
 type Props<T> = {
   name: keyof T;
   placeholder: string;
+  options: Option[];
 } & InputHTMLAttributes<HTMLSelectElement>;
 
 export default function SelectField<T>({
   name,
   placeholder,
   disabled,
+  options,
   ...rest
 }: Props<T>) {
   const form = useFormContext();
@@ -46,9 +53,9 @@ export default function SelectField<T>({
             </FormControl>
             <SelectContent>
               <SelectGroup>
-                {states.map((state) => (
-                  <SelectItem key={state.id} value={state.value}>
-                    {state.label}
+                {options.map((option) => (
+                  <SelectItem key={option.id} value={option.value}>
+                    {option.label}
                   </SelectItem>
                 ))}
               </SelectGroup>

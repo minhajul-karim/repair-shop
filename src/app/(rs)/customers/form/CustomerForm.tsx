@@ -9,6 +9,7 @@ import type { CustomerInsertSchemaType } from "@/zod-schema/customer";
 import { customerInsertSchema } from "@/zod-schema/customer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import states from "@/constants/states";
 
 type Props = {
   customer?: CustomerInsertSchemaType;
@@ -78,6 +79,7 @@ export default function CustomerForm({ customer }: Props) {
           <SelectField<CustomerInsertSchemaType>
             name="state"
             placeholder="Select state"
+            options={states}
           />
           <InputField<CustomerInsertSchemaType> name="zip" placeholder="Zip" />
           <TextAreaField<CustomerInsertSchemaType>
