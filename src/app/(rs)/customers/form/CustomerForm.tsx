@@ -1,20 +1,15 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { customerInsertSchema } from "@/zod-schema/customer";
-import type { CustomerInsertSchemaType } from "@/zod-schema/customer";
+import InputField from "@/components/inputs/InputField";
+import TextAreaField from "@/components/inputs/TextArea";
 import { Button } from "@/components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
+  Form
 } from "@/components/ui/form";
-// import { Input } from "@/components/ui/input"
+import type { CustomerInsertSchemaType } from "@/zod-schema/customer";
+import { customerInsertSchema } from "@/zod-schema/customer";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 type Props = {
   customer?: CustomerInsertSchemaType;
@@ -22,6 +17,7 @@ type Props = {
 
 export default function CustomerForm({ customer }: Props) {
   const form = useForm({
+    mode: "onBlur",
     resolver: zodResolver(customerInsertSchema),
     defaultValues: {
       firstName: customer?.firstName ?? "",
@@ -43,12 +39,58 @@ export default function CustomerForm({ customer }: Props) {
 
   return (
     <>
-      <h1 className="text-2xl font-bold">
+      <h1 className="text-2xl font-bold mb-5">
         {customer?.id ? `Edit customer #${customer?.id}` : "Create customer"}
       </h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          {JSON.stringify(form.getValues())}
+        <form
+          className="flex flex-col gap-5"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          <InputField<CustomerInsertSchemaType>
+            name="firstName"
+            placeholder="First name"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="lastName"
+            placeholder="Last name"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="email"
+            placeholder="Email address"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="phone"
+            placeholder="Phone"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="address1"
+            placeholder="Address 1"
+          />
+          <InputField<CustomerInsertSchemaType>
+            disabled
+            name="address2"
+            placeholder="Address 2"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="city"
+            placeholder="City"
+          />
+          <InputField<CustomerInsertSchemaType>
+            name="state"
+            placeholder="State"
+          />
+          <InputField<CustomerInsertSchemaType> name="zip" placeholder="Zip" />
+          <TextAreaField<CustomerInsertSchemaType>
+            name="notes"
+            placeholder="Notes"
+          />
+          <div className="flex gap-3">
+            <Button type="submit">Submit</Button>
+            <Button type="reset" onClick={() => form.reset()}>
+              Reset
+            </Button>
+          </div>
         </form>
       </Form>
     </>
